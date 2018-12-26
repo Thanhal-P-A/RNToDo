@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginTop: 5,
     elevation: 2,
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   iconTodoGroup: {
     flexDirection: "row",

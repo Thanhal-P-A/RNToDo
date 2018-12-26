@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { View, Text, Button, Alert } from "react-native";
+import { View, Text, Button, Alert ,Dimensions} from "react-native";
 import { Icon } from "react-native-elements";
 import styles from "./styles";
 import Swipeout from "react-native-swipeout";
+// import PushNotification from "react-native-push-notification";
+var { height, width } = Dimensions.get("window");
 
 export default class TodoView extends Component {
   _onPressEditButton() {
@@ -14,10 +16,12 @@ export default class TodoView extends Component {
       dateEdit: this.props.date,
       timeEdit: this.props.time
     });
+    this.props.dismissSwipeout();
   }
 
   _onPressCheckButton() {
     this.props.checkTodo(this.props.index);
+    this.props.dismissSwipeout();
   }
 
   _onPressDeleteButton() {
@@ -26,10 +30,12 @@ export default class TodoView extends Component {
         { text: "Cancel" },
         {
           text: "OK",
-          onPress: () =>
-            this.props.removeTodo(this.props.index, this.props.group)
+          onPress: () =>[
+            // PushNotification.cancelLocalNotificationById(this.props.listArray[this.props.index].id),
+            this.props.removeTodo(this.props.index, this.props.group)]
         }
       ]);
+      this.props.dismissSwipeout();
     }
   }
 
@@ -89,23 +95,19 @@ export default class TodoView extends Component {
           close={this.props.isCloseSwipeout}
         >
           <View style={styles.container}>
-            <View style={styles.viewTodoCheck}>
-              <Text style={styles.textTodo}>{this.props.todo}</Text>
-              {this.props.isChecked ? (
-                <Icon
-                  containerStyle={styles.iconChecked}
-                  size={14}
-                  name="check-circle"
-                  type="font-awsome"
-                  color="#0091F8"
-                />
-              ) : (
-                <View />
-              )}
-            </View>
             <View style={styles.viewTimeDate}>
+              <Icon
+              size={width*.05}
+              name={this.props.isChecked?"check-circle":"clock-o"}
+              type='font-awesome'
+              color={this.props.isChecked?"#0091F8":'grey'}
+            />
               <Text style={styles.textTime}>{this.props.time}</Text>
-              <Text style={styles.textDate}>{this.props.date}</Text>
+            </View>
+            <View style={[styles.viewTodoCheck,{borderColor:this.props.iconColor}]}>
+              <Text style={styles.textTodo}>{this.props.todo}</Text>
+            
+            <Text style={styles.textDate}>{this.props.date}</Text>
             </View>
           </View>
         </Swipeout>

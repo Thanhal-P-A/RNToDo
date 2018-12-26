@@ -1,47 +1,47 @@
-import { StyleSheet,Dimensions } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 var { height, width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   viewSwipeComponent: {
     flex: 1,
-    flexDirection:'row',
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
-  swiperIconContainer: {  },
+  swiperIconContainer: {},
   container: {
     flexDirection: "row",
     flex: 1,
-    padding: 10,
-    backgroundColor: "white",
     margin: 5,
-    elevation: 2,
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   viewTodoCheck: {
-    flex:6,
-    flexDirection:'row'
+    borderRadius: 2,
+    borderLeftWidth: 3,
+    padding: 10,
+    flex: 7,
+    elevation: 1,
+    backgroundColor: "white",
   },
   textTodo: {
-    fontSize: height*.025,
-    color: "black"
+    fontSize: height * 0.02,
+    color: "black",
   },
-  iconChecked: {
-    alignSelf: "flex-start",
-    padding:8
+  viewTimeDate: {
+    flex: 2,
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    paddingHorizontal: 10
   },
-  viewTimeDate: { flex:3,paddingLeft:3},
   textTime: {
-    fontSize: height*.02,
-    color: "grey",
-    alignSelf: "flex-end",
-    paddingTop: 5
+    fontSize: height * 0.015,
   },
   textDate: {
-    fontSize: height*.02,
+    fontSize: height * 0.015,
     color: "grey",
-    alignSelf: "flex-end",
-    paddingTop: 5
+    fontWeight:'bold',
+    paddingTop: 5,
   }
 });
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+  Text,
   View,
   TouchableOpacity,
   FlatList,
@@ -27,11 +28,18 @@ export class GroupTodo extends Component {
     })
   }
 
+  addTodo=()=>{
+    this.props.navigation.navigate("AddTodo", {
+      group: this.props.navigation.state.params.title,
+    });
+  }
+
 
   render() {
     return (
       <TouchableOpacity onPress={this._dismissSwipeout} style={styles.container} activeOpacity={1}>
         <Header
+          {...this.props}
           title={this.props.navigation.state.params.title}
           iconName={this.props.navigation.state.params.icon}
           iconColor={this.props.navigation.state.params.iconColor}
@@ -46,6 +54,8 @@ export class GroupTodo extends Component {
               return (
                 <TouchableOpacity>
                   <TodoView
+                    iconColor={this.props.navigation.state.params.iconColor}
+                    dismissSwipeout={this._dismissSwipeout}
                     {...this.props}
                     todo={item.todo}
                     index={index}
@@ -61,6 +71,9 @@ export class GroupTodo extends Component {
             keyExtractor={(item, index) => item.todo}
           />
         </View>
+        <TouchableOpacity onPress={this.addTodo} style={styles.addButton}>
+            <Text style={styles.textAddButton}>+</Text>
+        </TouchableOpacity>
       </TouchableOpacity>
     );
   }

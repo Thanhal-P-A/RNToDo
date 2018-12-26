@@ -18,10 +18,12 @@ export default class TodoView extends Component {
       dateEdit: this.props.date,
       timeEdit:this.props.time
     });
+    this.props.dismissSwipeout();
   }
 
   _onPressCheckButton() {
     this.props.checkTodo(this.props.index);
+    this.props.dismissSwipeout();
   }
 
   _onPressDeleteButton() {
@@ -34,6 +36,7 @@ export default class TodoView extends Component {
             this.props.removeTodo(this.props.index, this.props.group)
         }
       ]);
+      this.props.dismissSwipeout();
     }
   }
 

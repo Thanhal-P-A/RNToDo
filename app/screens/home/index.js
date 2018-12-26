@@ -98,6 +98,7 @@ export class AllLists extends Component {
               return (
                 <TouchableOpacity>
                   <TodoView
+                    dismissSwipeout={this._dismissSwipeout}
                     {...this.props}
                     todo={item.todo}
                     index={index}

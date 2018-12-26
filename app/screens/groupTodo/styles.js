@@ -20,6 +20,23 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     fontSize: 20,
     paddingRight:50
+  },
+  addButton:{
+    backgroundColor:'#4642F1',
+    position:'absolute',
+    elevation:5,
+    height:50,
+    width:50,
+    borderRadius:25,
+    alignItems:'center',
+    justifyContent:'center',
+    alignSelf:'flex-end',
+    top:'90%',
+    right:'5%'
+  },
+  textAddButton:{
+    color:"white",
+    fontSize:30
   }
 });
 

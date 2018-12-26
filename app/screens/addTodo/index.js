@@ -123,41 +123,59 @@ export class AddTodo extends Component {
     });
 
   _handleDatePicked = date => {
-    this.setState({
-      dateForCalendarStrip: date,
-      selectedDate:
-        date.getDate() +
-        " - " +
-        parseInt(date.getMonth() + 1) +
-        " - " +
-        date.getFullYear()
-    });
-    this._assignTimestamp();
-    this._hideDateTimePicker();
+    if (date.getTime() > today.getTime()) {
+      this.setState({
+        dateForCalendarStrip: date,
+        selectedDate:
+          date.getDate() +
+          " - " +
+          parseInt(date.getMonth() + 1) +
+          " - " +
+          date.getFullYear()
+      });
+      this._assignTimestamp();
+      this._hideDateTimePicker();
+    } else {
+      this.setState({
+        isOnToggle: false,
+        selectedTime: "",
+        dateForCalendarStrip: date,
+        selectedDate:
+          date.getDate() +
+          " - " +
+          parseInt(date.getMonth() + 1) +
+          " - " +
+          date.getFullYear()
+      });
+      this._assignTimestamp();
+      this._hideDateTimePicker();
+    }
   };
 
   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
   _onToggleFunction = () => {
-    if (this.state.isOnToggle) {
-      this.setState(
-        {
-          isOnToggle: false,
-          selectedTime: ""
-        },
-        () => {
-          this._assignSelectedTime();
-        }
-      );
-    } else {
-      this.setState(
-        {
-          isOnToggle: true
-        },
-        () => {
-          this._assignSelectedTime();
-        }
-      );
+    if (today.getTime() < this.state.timestamp + 86400000) {
+      if (this.state.isOnToggle) {
+        this.setState(
+          {
+            isOnToggle: false,
+            selectedTime: ""
+          },
+          () => {
+            this._assignSelectedTime();
+          }
+        );
+      } else {
+        this.setState(
+          {
+            isOnToggle: true
+          },
+          () => {
+            this._assignSelectedTime();
+          }
+        );
+      }
     }
   };
 
@@ -226,53 +244,73 @@ export class AddTodo extends Component {
   };
 
   componentDidMount() {
-    if(minuteEdit<10){
-      minuteEdit="0"+minuteEdit;
+    if (minuteEdit < 10) {
+      minuteEdit = "0" + minuteEdit;
     }
-    if(hourEdit==0){
-      hourEdit=12;
+    if (hourEdit == 0) {
+      hourEdit = 12;
     }
-    if(timeEdit==""){
-      this.setState({
-        groupName: group,
-        holder: editTodo,
-        selectedDate:dateEdit,
-        dateForCalendarStrip:dateForCalendarEdit,
-      },
-      () => {
-        this._assignSelectedTime();
-      })
+    if (moment(dateEdit, "DD - MM - YYYY").valueOf() > today.getTime()) {
+      if (timeEdit == "") {
+        this.setState(
+          {
+            groupName: group,
+            holder: editTodo,
+            selectedDate: dateEdit,
+            dateForCalendarStrip: dateForCalendarEdit
+          },
+          () => {
+            this._assignSelectedTime();
+          }
+        );
+      } else if (timeEditDate.hour() >= 12) {
+        this.setState(
+          {
+            isAM: false,
+            isOnToggle: true,
+            groupName: group,
+            holder: editTodo,
+            selectedDate: dateEdit,
+            dateForCalendarStrip: dateForCalendarEdit,
+            isHourSelected: hourEdit,
+            isMinuteSelected: minuteEdit
+          },
+          () => {
+            this._assignSelectedTime();
+          }
+        );
+      } else {
+        this.setState(
+          {
+            isOnToggle: true,
+            groupName: group,
+            holder: editTodo,
+            selectedDate: dateEdit,
+            dateForCalendarStrip: dateForCalendarEdit,
+            isHourSelected: hourEdit,
+            isMinuteSelected: minuteEdit
+          },
+          () => {
+            this._assignSelectedTime();
+          }
+        );
+      }
+    } else {
+      this.setState(
+        {
+          isOnToggle: false,
+          selectedTime: "",
+          groupName: group,
+          holder: editTodo,
+          selectedDate: dateEdit,
+          dateForCalendarStrip: dateForCalendarEdit
+        },
+        () => {
+          this._assignSelectedTime();
+        }
+      );
     }
-    else if(timeEditDate.hour()>=12){
-    this.setState({
-      isAM:false,
-      isOnToggle:true,
-      groupName: group,
-      holder: editTodo,
-      selectedDate:dateEdit,
-      dateForCalendarStrip:dateForCalendarEdit,
-      isHourSelected:hourEdit,
-      isMinuteSelected:minuteEdit
-    },
-    () => {
-      this._assignSelectedTime();
-    });
-    }
-    else{
-      this.setState({
-        isOnToggle:true,
-        groupName: group,
-        holder: editTodo,
-        selectedDate:dateEdit,
-        dateForCalendarStrip:dateForCalendarEdit,
-        isHourSelected:hourEdit,
-        isMinuteSelected:minuteEdit
-      },
-      () => {
-        this._assignSelectedTime();
-      });
-    }
-}
+  }
 
   render() {
     const { navigation } = this.props;
@@ -281,12 +319,13 @@ export class AddTodo extends Component {
     index = navigation.getParam("index");
     group = navigation.getParam("group", "ToDo");
     dateEdit = navigation.getParam("dateEdit", this.state.selectedDate);
-    dateForCalendarEdit = moment(dateEdit,"DD - MM - YYYY");
-    timeEdit = navigation.getParam("timeEdit","");
-    timeEditDate= moment("21-09-2018T"+timeEdit,"DD-MM-YYYYTh : mm A");
-    hourEdit=((timeEditDate.hour()>12)?(timeEditDate.hour()-12):timeEditDate.hour());
- 
-    minuteEdit=timeEditDate.minutes();
+    dateForCalendarEdit = moment(dateEdit, "DD - MM - YYYY");
+    timeEdit = navigation.getParam("timeEdit", "");
+    timeEditDate = moment("21-09-2018T" + timeEdit, "DD-MM-YYYYTh : mm A");
+    hourEdit =
+      timeEditDate.hour() > 12 ? timeEditDate.hour() - 12 : timeEditDate.hour();
+
+    minuteEdit = timeEditDate.minutes();
     return (
       <TouchableOpacity
         style={styles.container}
@@ -432,7 +471,12 @@ export class AddTodo extends Component {
             </View>
           </View>
         </ScrollView>
-        <View style={[styles.viewTextInput, this.state.bumpedUp && styles.bumpedcontainer]}>
+        <View
+          style={[
+            styles.viewTextInput,
+            this.state.bumpedUp && styles.bumpedcontainer
+          ]}
+        >
           <TextInput
             value={this.state.holder}
             style={styles.textInputTodo}
