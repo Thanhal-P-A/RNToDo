@@ -132,9 +132,7 @@ export class AddTodo extends Component {
           parseInt(date.getMonth() + 1) +
           " - " +
           date.getFullYear()
-      });
-      this._assignTimestamp();
-      this._hideDateTimePicker();
+      },()=>this._assignTimestamp());
     } else {
       this.setState({
         isOnToggle: false,
@@ -146,9 +144,7 @@ export class AddTodo extends Component {
           parseInt(date.getMonth() + 1) +
           " - " +
           date.getFullYear()
-      });
-      this._assignTimestamp();
-      this._hideDateTimePicker();
+      },()=>this._assignTimestamp());
     }
   };
 
@@ -335,9 +331,11 @@ export class AddTodo extends Component {
         <ScrollView>
           <View style={styles.viewDateSelector}>
             <Calendar
+              isEdit={isEdit}
               isAddTodo={true}
               startDate={this.state.dateForCalendarStrip}
               showDateTimePicker={this._showDateTimePicker}
+              handleDatePicked={this._handleDatePicked}
             />
             <DateTimePicker
               isVisible={this.state.isDateTimePickerVisible}

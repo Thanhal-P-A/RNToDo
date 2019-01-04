@@ -16,6 +16,7 @@ import {
 } from "../../actions/todoAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+// import DateTimePicker from "react-native-modal-datetime-picker";
 import GroupCard from "../../components/groupCard";
 import Calendar from "../../components/calendarStrip";
 import TodoView from "./todoView";
@@ -26,7 +27,7 @@ export class AllLists extends Component {
   constructor() {
     super();
     this.state = {
-      isCloseSwipeout: false
+      isCloseSwipeout: false,
     };
   }
 
@@ -87,7 +88,8 @@ export class AllLists extends Component {
         activeOpacity={1}
       >
         <View style={styles.viewTop}>
-          <Calendar {...this.props} isAddTodo={false} />
+          <Calendar {...this.props} isAddTodo={false}
+              showDateTimePicker={this._showDateTimePicker} />
         </View>
         <View style={styles.viewTodoList}>
           <FlatList

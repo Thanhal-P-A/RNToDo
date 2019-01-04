@@ -12,11 +12,50 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: getStatusBarHeight(true),
   },
+  monthYearA:{
+    flex:1,
+    position:'absolute',
+    paddingTop:20,
+    paddingLeft:10,
+    elevation:5,
+    width:"100%",
+    alignItems:'center'
+  },
+  monthYear:{
+    flex:1,
+    position:'absolute',
+    paddingTop:20,
+    paddingLeft:10,
+    elevation:5,
+  },
+  textMonthA:{
+    color:'black',
+    fontSize:height * 0.03,
+    fontWeight:'400',
+  },
+  textMonth:{
+    color:'black',
+    fontSize:height * 0.04,
+    fontWeight:"400"
+  },
+  textYear:{
+    fontSize:height * 0.038,
+    color:'grey',
+    fontWeight:'normal',
+  },
+  textYearA:{
+    fontSize:height * 0.027,
+    color:'grey',
+    fontWeight:'normal',
+  },
   calendarInnerStyleA: {
-    flex: 1
+    flex: 1,
+    paddingTop:30,
   },
   calendarInnerStyle: {
-    flex: 1
+    flex: 1,
+    paddingTop:40,
+    // paddingHorizontal:6
   },
   calendarStyleA: {
     flex: 1,
