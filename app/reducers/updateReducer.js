@@ -1,10 +1,8 @@
 import * as types from "../actions/types";
-import PushNotification from "react-native-push-notification";
 import NotifService from "../utils/notifService";
 
-
 const notif = new NotifService();
-let idNo =0;
+let idNo = 0;
 initialState = {
   listArray: [],
   taskNo: {
@@ -28,18 +26,18 @@ const updateReducer = (state = initialState, action) => {
     case types.ADD: {
       ++idNo;
       if (action.todo != "") {
-        const {listArray, taskNo, dateSelected } = state;
-        if ((action.timestamp > new Date().getTime())&&(action.time!="")) {
+        const { listArray, taskNo, dateSelected } = state;
+        if (action.timestamp > new Date().getTime() && action.time != "") {
           notif.scheduleNotif(
-            id=idNo,
+            (id = idNo.toString()),
             action.todo,
             action.group,
             action.timestamp
           );
         }
-        
+
         const item = {
-          id:idNo.toString(),
+          id: idNo.toString(),
           group: action.group.toString(),
           todo: action.todo.toString(),
           time: action.time.toString(),
@@ -66,8 +64,6 @@ const updateReducer = (state = initialState, action) => {
       const { listArray, taskNo, dateSelected } = state;
       --taskNo[action.group];
       id = listArray[action.index].id;
-      console.log("STATE VALUES:idddddd",listArray[action.index].id,id);
-      
       notif.cancelNotif(id);
       listArray.splice(action.index, 1);
       return { listArray, taskNo, dateSelected, updatedAt: new Date() };

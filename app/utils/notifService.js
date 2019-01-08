@@ -29,6 +29,6 @@ export default class NotifService {
   }
   cancelNotif(idNo){
     // PushNotification.cancelLocalNotifications({id:idNo});
-    PushNotification.cancelLocalNotificationById(idNo);
+    PushNotification.cancelLocalNotifications({id:idNo});
   }
 }

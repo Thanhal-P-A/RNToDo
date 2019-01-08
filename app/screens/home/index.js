@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {
   View,
   Text,
+  Image,
   TouchableOpacity,
   FlatList,
   Dimensions
@@ -16,7 +17,6 @@ import {
 } from "../../actions/todoAction";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import DateTimePicker from "react-native-modal-datetime-picker";
 import GroupCard from "../../components/groupCard";
 import Calendar from "../../components/calendarStrip";
 import TodoView from "./todoView";
@@ -27,7 +27,7 @@ export class AllLists extends Component {
   constructor() {
     super();
     this.state = {
-      isCloseSwipeout: false,
+      isCloseSwipeout: false
     };
   }
 
@@ -88,33 +88,37 @@ export class AllLists extends Component {
         activeOpacity={1}
       >
         <View style={styles.viewTop}>
-          <Calendar {...this.props} isAddTodo={false}
-              showDateTimePicker={this._showDateTimePicker} />
+          <Calendar {...this.props} isAddTodo={false} />
         </View>
         <View style={styles.viewTodoList}>
-          <FlatList
-            style={styles.flatList}
-            data={this.props.listArray}
-            extraData={[this.props, this.state]}
-            renderItem={({ item, index }) => {
-              return (
-                <TouchableOpacity>
-                  <TodoView
-                    dismissSwipeout={this._dismissSwipeout}
-                    {...this.props}
-                    todo={item.todo}
-                    index={index}
-                    group={item.group}
-                    time={item.time}
-                    date={item.date}
-                    isChecked={item.isChecked}
-                    isCloseSwipeout={this.state.isCloseSwipeout}
-                  />
-                </TouchableOpacity>
-              );
-            }}
-            keyExtractor={(item, index) => item.todo}
-          />
+          {this.props.listArray.length != 0 ? (
+            <FlatList
+              style={styles.flatList}
+              data={this.props.listArray}
+              extraData={[this.props, this.state]}
+              renderItem={({ item, index }) => {
+                return (
+                  <TouchableOpacity>
+                    <TodoView
+                      dismissSwipeout={this._dismissSwipeout}
+                      {...this.props}
+                      length={this.props.listArray.length}
+                      todo={item.todo}
+                      index={index}
+                      group={item.group}
+                      time={item.time}
+                      date={item.date}
+                      isChecked={item.isChecked}
+                      isCloseSwipeout={this.state.isCloseSwipeout}
+                    />
+                  </TouchableOpacity>
+                );
+              }}
+              keyExtractor={(item, index) => item.todo}
+            />
+          ) : (
+            <TodoView isNoTask={true} />
+          )}
         </View>
         <View style={styles.viewBottom}>
           <Text style={styles.textBottom}>Add More</Text>
@@ -163,7 +167,9 @@ export class AllLists extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               style={{ flex: 1 }}
-              onPress={() => this.props.navigation.navigate("AddTodo",{del:false})}
+              onPress={() =>
+                this.props.navigation.navigate("AddTodo", { del: false })
+              }
               onLongPress={this.todoGroup}
             >
               <View style={styles.viewAddCard}>
@@ -174,14 +180,8 @@ export class AllLists extends Component {
                   color="white"
                   type="entypo"
                 />
-                <Text
-                  style={styles.textAddmore}
-                >
-                  Add More
-                </Text>
-                <Text style={styles.textTodoAddCard}>
-                  ToDo
-                </Text>
+                <Text style={styles.textAddmore}>Add More</Text>
+                <Text style={styles.textTodoAddCard}>ToDo</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -192,7 +192,7 @@ export class AllLists extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("STATE VALUES: ", state);
+  console.log("STATE VALUES HOME: ", state);
   const { listArray, taskNo, dateSelected, updatedAt } = state.updateReducer;
   return { listArray, taskNo, dateSelected, updatedAt };
 };

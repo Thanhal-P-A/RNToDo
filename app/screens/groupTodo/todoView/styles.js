@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 7,
     elevation: 1,
-    backgroundColor: "white",
+    backgroundColor: "white"
   },
   textTodo: {
     fontSize: height * 0.02,
-    color: "black",
+    color: "black"
   },
   viewTimeDate: {
     flex: 2,
@@ -35,13 +35,28 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10
   },
   textTime: {
-    fontSize: height * 0.015,
+    fontSize: height * 0.015
   },
   textDate: {
     fontSize: height * 0.015,
     color: "grey",
-    fontWeight:'bold',
-    paddingTop: 5,
+    fontWeight: "bold",
+    paddingTop: 5
+  },
+  viewNoTask: {
+    height: height * 0.8,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  imageNoTask: {
+    height: height * 0.2,
+    width: width * 0.4,
+    opacity: 0.5
+  },
+  textNoTask: {
+    fontSize: width * 0.05,
+    color: "grey",
+    opacity: 0.4
   }
 });
 

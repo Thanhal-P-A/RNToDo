@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import { View, Text, Button, Alert ,Dimensions} from "react-native";
+import { View, Text, Image, Alert, Dimensions } from "react-native";
 import { Icon } from "react-native-elements";
 import styles from "./styles";
 import Swipeout from "react-native-swipeout";
-// import PushNotification from "react-native-push-notification";
 var { height, width } = Dimensions.get("window");
 
 export default class TodoView extends Component {
+  constructor() {
+    super();
+    flag = false;
+  }
   _onPressEditButton() {
     this.props.navigation.navigate("AddTodo", {
       editTodo: this.props.todo,
@@ -30,9 +33,9 @@ export default class TodoView extends Component {
         { text: "Cancel" },
         {
           text: "OK",
-          onPress: () =>[
-            // PushNotification.cancelLocalNotificationById(this.props.listArray[this.props.index].id),
-            this.props.removeTodo(this.props.index, this.props.group)]
+          onPress: () => [
+            this.props.removeTodo(this.props.index, this.props.group)
+          ]
         }
       ]);
       this.props.dismissSwipeout();
@@ -86,7 +89,18 @@ export default class TodoView extends Component {
         backgroundColor: "#0091F8"
       }
     ];
-    if (this.props.group == this.props.navigation.state.params.title) {
+
+    if (this.props.isNoTask) {
+      return (
+        <View style={styles.viewNoTask}>
+          <Image
+            style={styles.imageNoTask}
+            source={require("../../../images/task.png")}
+          />
+          <Text style={styles.textNoTask}>No Task To Do</Text>
+        </View>
+      );
+    } else if (this.props.group == this.props.navigation.state.params.title) {
       return (
         <Swipeout
           right={swipeTodo}
@@ -97,20 +111,51 @@ export default class TodoView extends Component {
           <View style={styles.container}>
             <View style={styles.viewTimeDate}>
               <Icon
-              size={width*.05}
-              name={this.props.isChecked?"check-circle":"clock-o"}
-              type='font-awesome'
-              color={this.props.isChecked?"#0091F8":'grey'}
-            />
+                size={width * 0.05}
+                name={this.props.isChecked ? "check-circle" : "clock-o"}
+                type="font-awesome"
+                color={this.props.isChecked ? "#0091F8" : "grey"}
+              />
               <Text style={styles.textTime}>{this.props.time}</Text>
             </View>
-            <View style={[styles.viewTodoCheck,{borderColor:this.props.iconColor}]}>
+            <View
+              style={[
+                styles.viewTodoCheck,
+                { borderColor: this.props.iconColor }
+              ]}
+            >
               <Text style={styles.textTodo}>{this.props.todo}</Text>
-            
-            <Text style={styles.textDate}>{this.props.date}</Text>
+
+              <Text style={styles.textDate}>{this.props.date}</Text>
             </View>
           </View>
         </Swipeout>
+      );
+    } else if (this.props.index == this.props.length - 1) {
+      for (i = 0; i <= this.props.index; i++) {
+        if (
+          this.props.listArray[i].group ===
+          this.props.navigation.state.params.title
+        ) {
+          flag = false;
+          break;
+        } else {
+          flag = true;
+        }
+      }
+    } else {
+      return <View />;
+    }
+
+    if (flag) {
+      return (
+        <View style={styles.viewNoTask}>
+          <Image
+            style={styles.imageNoTask}
+            source={require("../../../images/task.png")}
+          />
+          <Text style={styles.textNoTask}>No Task To Do</Text>
+        </View>
       );
     } else {
       return <View />;

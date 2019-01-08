@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, Button, Dimensions, Alert } from "react-native";
+import { View, Text, Image, Dimensions, Alert } from "react-native";
 import { Icon } from "react-native-elements";
 import Swipeout from "react-native-swipeout";
 import styles from "./styles";
@@ -9,6 +9,13 @@ import { Group } from "../../../utils/group";
 var { height, width } = Dimensions.get("window");
 
 export default class TodoView extends Component {
+  constructor() {
+    super();
+    flag = false;
+  }
+
+  componentDidMount() {}
+
   _onPressEditButton() {
     this.props.navigation.navigate("AddTodo", {
       editTodo: this.props.todo,
@@ -16,7 +23,7 @@ export default class TodoView extends Component {
       index: this.props.index,
       group: this.props.group,
       dateEdit: this.props.date,
-      timeEdit:this.props.time
+      timeEdit: this.props.time
     });
     this.props.dismissSwipeout();
   }
@@ -41,6 +48,9 @@ export default class TodoView extends Component {
   }
 
   render() {
+    var index = this.props.index;
+    var length = this.props.length;
+    var isNoTask = this.props.isNoTask;
     const swipeTodo = [
       {
         component: (
@@ -87,7 +97,18 @@ export default class TodoView extends Component {
         backgroundColor: "#0091F8"
       }
     ];
-    if (this.props.date === this.props.dateSelected) {
+
+    if (isNoTask) {
+      return (
+        <View style={styles.viewNoTask}>
+          <Image
+            style={styles.imageNoTask}
+            source={require("../../../images/task.png")}
+          />
+          <Text style={styles.textNoTask}>No Task To Do</Text>
+        </View>
+      );
+    } else if (this.props.date === this.props.dateSelected) {
       return (
         <Swipeout
           right={swipeTodo}
@@ -127,6 +148,29 @@ export default class TodoView extends Component {
             </View>
           </View>
         </Swipeout>
+      );
+    } else if (index == length - 1) {
+      for (i = 0; i <= index; i++) {
+        if (this.props.listArray[i].date === this.props.dateSelected) {
+          flag = false;
+          break;
+        } else {
+          flag = true;
+        }
+      }
+    } else {
+      return <View />;
+    }
+
+    if (flag) {
+      return (
+        <View style={styles.viewNoTask}>
+          <Image
+            style={styles.imageNoTask}
+            source={require("../../../images/task.png")}
+          />
+          <Text style={styles.textNoTask}>No Task To Do</Text>
+        </View>
       );
     } else {
       return <View />;

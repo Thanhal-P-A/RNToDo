@@ -116,17 +116,17 @@ const styles = StyleSheet.create({
     margin: height * 0.015,
     marginBottom: height * 0.05,
     borderWidth: 0.5,
-    borderColor: "#ABABAB",
+    borderColor: "#ABABAB"
   },
   bumpedcontainer: {
     marginBottom: Platform.OS === "ios" ? 230 : 5
   },
   textInputTodo: {
-    flex:1,
+    flex: 1,
     color: "black",
     paddingLeft: 10,
     fontSize: 16,
-    paddingRight: 20,
+    paddingRight: 20
   },
   doneButton: {
     height: height * 0.07,

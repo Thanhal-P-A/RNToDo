@@ -87,7 +87,6 @@ export default class Calendar extends Component {
 
 
   render() {
-    console.log("hhhhhhhhhhc",this.props)
     return (
       <View style={this.props.isAddTodo ? styles.containerA : styles.container}>
         <CalendarStrip

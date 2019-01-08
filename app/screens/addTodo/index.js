@@ -124,27 +124,33 @@ export class AddTodo extends Component {
 
   _handleDatePicked = date => {
     if (date.getTime() > today.getTime()) {
-      this.setState({
-        dateForCalendarStrip: date,
-        selectedDate:
-          date.getDate() +
-          " - " +
-          parseInt(date.getMonth() + 1) +
-          " - " +
-          date.getFullYear()
-      },()=>this._assignTimestamp());
+      this.setState(
+        {
+          dateForCalendarStrip: date,
+          selectedDate:
+            date.getDate() +
+            " - " +
+            parseInt(date.getMonth() + 1) +
+            " - " +
+            date.getFullYear()
+        },
+        () => this._assignTimestamp()
+      );
     } else {
-      this.setState({
-        isOnToggle: false,
-        selectedTime: "",
-        dateForCalendarStrip: date,
-        selectedDate:
-          date.getDate() +
-          " - " +
-          parseInt(date.getMonth() + 1) +
-          " - " +
-          date.getFullYear()
-      },()=>this._assignTimestamp());
+      this.setState(
+        {
+          isOnToggle: false,
+          selectedTime: "",
+          dateForCalendarStrip: date,
+          selectedDate:
+            date.getDate() +
+            " - " +
+            parseInt(date.getMonth() + 1) +
+            " - " +
+            date.getFullYear()
+        },
+        () => this._assignTimestamp()
+      );
     }
   };
 
@@ -498,6 +504,7 @@ export class AddTodo extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log("STATE VALUES ADDTODO: ", state);
   const { listArray, updatedAt, dateSelected, taskNo } = state.updateReducer;
   return { listArray, updatedAt, dateSelected, taskNo };
 };

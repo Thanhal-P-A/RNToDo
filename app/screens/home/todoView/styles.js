@@ -54,6 +54,21 @@ const styles = StyleSheet.create({
     color: "grey",
     alignSelf: "flex-end",
     paddingTop: 5
+  },
+  viewNoTask:{
+    height:height*.35,
+    alignItems:'center',
+    justifyContent:"center"
+  },
+  imageNoTask:{
+    height:height*.2,
+    width:width*.4,
+    opacity:.5
+  },
+  textNoTask:{
+    fontSize:width*.05,
+    color:'grey',
+    opacity:.3
   }
 });
 export default styles;
