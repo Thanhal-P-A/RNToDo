@@ -24,3 +24,7 @@ export const checkTodo = index => ({
   type: types.CHECKED,
   index
 });
+
+export const doneIntro =()=>({
+  type: types.DONE
+})

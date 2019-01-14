@@ -4,7 +4,6 @@ import GroupCard from "../groupCard";
 import styles from "./styles";
 
 export default class Group extends Component {
-
   pressHandler(grpName) {
     this.props.groupSelect(grpName);
     this.setState({ titleClicked: grpName });

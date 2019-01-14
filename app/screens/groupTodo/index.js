@@ -9,6 +9,13 @@ import Header from "../../components/header";
 export class GroupTodo extends Component {
   constructor() {
     super();
+    today = new Date();
+    dateToday =
+      today.getDate() +
+      " - " +
+      parseInt(today.getMonth() + 1) +
+      " - " +
+      today.getFullYear();
     this.state = {
       isCloseSwipeout: false,
       isLoading: true
@@ -23,7 +30,8 @@ export class GroupTodo extends Component {
 
   addTodo = () => {
     this.props.navigation.navigate("AddTodo", {
-      group: this.props.navigation.state.params.title
+      group: this.props.navigation.state.params.title,
+      dateEdit: dateToday
     });
   };
 
@@ -81,7 +89,7 @@ export class GroupTodo extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("STATE VALUESaddtodo: ", state);
+  console.log("STATE VALUES GROUPTODO: ", state);
   const { listArray, taskNo, updatedAt } = state.updateReducer;
   return { listArray, taskNo, updatedAt };
 };

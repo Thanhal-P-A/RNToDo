@@ -4,6 +4,7 @@ import NotifService from "../utils/notifService";
 const notif = new NotifService();
 let idNo = 0;
 initialState = {
+  isIntro: true,
   listArray: [],
   taskNo: {
     ToDo: 0,
@@ -96,6 +97,13 @@ const updateReducer = (state = initialState, action) => {
           updatedAt: new Date()
         };
       }
+    }
+    case types.DONE: {
+      return {
+        ...state,
+        updatedAt: new Date(),
+        isIntro: false
+      };
     }
     default:
       return state;

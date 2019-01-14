@@ -103,7 +103,7 @@ export default class TodoView extends Component {
         <View style={styles.viewNoTask}>
           <Image
             style={styles.imageNoTask}
-            source={require("../../../images/task.png")}
+            source={require("../../../images/no_todo.png")}
           />
           <Text style={styles.textNoTask}>No Task To Do</Text>
         </View>
@@ -167,7 +167,7 @@ export default class TodoView extends Component {
         <View style={styles.viewNoTask}>
           <Image
             style={styles.imageNoTask}
-            source={require("../../../images/task.png")}
+            source={require("../../../images/no_todo.png")}
           />
           <Text style={styles.textNoTask}>No Task To Do</Text>
         </View>

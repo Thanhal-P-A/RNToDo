@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
-import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { getStatusBarHeight } from "react-native-status-bar-height";
 
 var { height, width } = Dimensions.get("window");
 
@@ -10,51 +10,51 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingTop: getStatusBarHeight(true),
+    paddingTop: getStatusBarHeight(true)
   },
-  monthYearA:{
-    flex:1,
-    position:'absolute',
-    paddingTop:20,
-    paddingLeft:10,
-    elevation:5,
-    width:"100%",
-    alignItems:'center'
+  monthYearA: {
+    flex: 1,
+    position: "absolute",
+    paddingTop: 20,
+    paddingLeft: 10,
+    elevation: 5,
+    width: "100%",
+    alignItems: "center"
   },
-  monthYear:{
-    flex:1,
-    position:'absolute',
-    paddingTop:20,
-    paddingLeft:10,
-    elevation:5,
+  monthYear: {
+    flex: 1,
+    position: "absolute",
+    paddingTop: 20,
+    paddingLeft: 10,
+    elevation: 5
   },
-  textMonthA:{
-    color:'black',
-    fontSize:height * 0.03,
-    fontWeight:'400',
+  textMonthA: {
+    color: "black",
+    fontSize: height * 0.03,
+    fontWeight: "400"
   },
-  textMonth:{
-    color:'black',
-    fontSize:height * 0.04,
-    fontWeight:"400"
+  textMonth: {
+    color: "black",
+    fontSize: height * 0.04,
+    fontWeight: "400"
   },
-  textYear:{
-    fontSize:height * 0.038,
-    color:'grey',
-    fontWeight:'normal',
+  textYear: {
+    fontSize: height * 0.038,
+    color: "grey",
+    fontWeight: "normal"
   },
-  textYearA:{
-    fontSize:height * 0.027,
-    color:'grey',
-    fontWeight:'normal',
+  textYearA: {
+    fontSize: height * 0.027,
+    color: "grey",
+    fontWeight: "normal"
   },
   calendarInnerStyleA: {
     flex: 1,
-    paddingTop:30,
+    paddingTop: 30
   },
   calendarInnerStyle: {
     flex: 1,
-    paddingTop:40,
+    paddingTop: 40
     // paddingHorizontal:6
   },
   calendarStyleA: {
@@ -77,8 +77,7 @@ const styles = StyleSheet.create({
     fontSize: height * 0.04,
     color: "black",
     alignSelf: "flex-start",
-    paddingLeft: 10,
-    
+    paddingLeft: 10
   },
   dateNameStyleA: {
     color: "black"
@@ -105,13 +104,13 @@ const styles = StyleSheet.create({
     color: "white",
     height: 28,
     width: 28,
-    borderRadius:14,
+    borderRadius: 14,
     backgroundColor: "#4642F1",
-    alignSelf:'center',
-    alignItems: 'center',
-    justifyContent:'center',
-    elevation:2,
-    overflow: 'hidden'
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    elevation: 2,
+    overflow: "hidden"
   },
   highlightDateNumberStyle: {
     color: "white",

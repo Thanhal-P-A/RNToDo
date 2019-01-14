@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     marginTop: 5,
     elevation: 2,
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   iconTodoGroup: {
     flexDirection: "row",
@@ -55,20 +55,20 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     paddingTop: 5
   },
-  viewNoTask:{
-    height:height*.35,
-    alignItems:'center',
-    justifyContent:"center"
+  viewNoTask: {
+    height: height * 0.35,
+    alignItems: "center",
+    justifyContent: "center"
   },
-  imageNoTask:{
-    height:height*.2,
-    width:width*.4,
-    opacity:.5
+  imageNoTask: {
+    height: height * 0.2,
+    width: width * 0.4,
+    opacity: 0.5
   },
-  textNoTask:{
-    fontSize:width*.05,
-    color:'grey',
-    opacity:.3
+  textNoTask: {
+    fontSize: width * 0.05,
+    color: "grey",
+    opacity: 0.3
   }
 });
 export default styles;

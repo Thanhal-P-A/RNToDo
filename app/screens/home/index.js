@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
   FlatList,
   Dimensions
@@ -29,6 +28,12 @@ export class AllLists extends Component {
     this.state = {
       isCloseSwipeout: false
     };
+  }
+
+  componentWillMount() {
+    if (this.props.isIntro) {
+      this.props.navigation.navigate("Intro");
+    }
   }
 
   _dismissSwipeout = () => {
@@ -193,8 +198,14 @@ export class AllLists extends Component {
 
 const mapStateToProps = state => {
   console.log("STATE VALUES HOME: ", state);
-  const { listArray, taskNo, dateSelected, updatedAt } = state.updateReducer;
-  return { listArray, taskNo, dateSelected, updatedAt };
+  const {
+    listArray,
+    taskNo,
+    dateSelected,
+    updatedAt,
+    isIntro
+  } = state.updateReducer;
+  return { listArray, taskNo, dateSelected, updatedAt, isIntro };
 };
 const mapDispatchToProps = dispatch =>
   bindActionCreators(

@@ -26,24 +26,12 @@ const minute = ["05", 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, "00"];
 export class AddTodo extends Component {
   constructor() {
     super();
-
     today = new Date();
-    dateToday =
-      today.getDate() +
-      " - " +
-      parseInt(today.getMonth() + 1) +
-      " - " +
-      today.getFullYear();
     this.state = {
       dateForCalendarStrip: new Date(),
       isDateTimePickerVisible: false,
-      groupName: "ToDo",
-      holder: "",
-      selectedDate: dateToday,
-      selectedTime: "",
-      timestamp: moment(dateToday, "D - M - YYYY").valueOf() - 1,
       isOnToggle: false,
-      isHourSelected: "7",
+      isHourSelected: "6",
       isMinuteSelected: "30",
       isAM: true,
       bumpedUp: 0
@@ -320,7 +308,7 @@ export class AddTodo extends Component {
     isEdit = navigation.getParam("isEdit", "");
     index = navigation.getParam("index");
     group = navigation.getParam("group", "ToDo");
-    dateEdit = navigation.getParam("dateEdit", this.state.selectedDate);
+    dateEdit = navigation.getParam("dateEdit", this.props.dateSelected);
     dateForCalendarEdit = moment(dateEdit, "DD - MM - YYYY");
     timeEdit = navigation.getParam("timeEdit", "");
     timeEditDate = moment("21-09-2018T" + timeEdit, "DD-MM-YYYYTh : mm A");
